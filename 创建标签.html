@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>创建标签</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul,
+        ol,
+        li {
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        img {
+            border: none;
+        }
+        p{
+            margin: 10px auto;
+            text-align: center;
+        }
+        #btn{
+            background-color: #000;
+            color: red;
+            font-size: 16px; 
+            cursor: pointer;
+        }
+        div{
+            display: inline-block;
+            width: 60px;
+            height: 50px;
+            background-color: skyblue;
+            margin-right: 16px;
+        }
+    </style>
+</head>
+
+<body>
+    <p><input type="button" value="生成10个div" id="btn"></p>
+    
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <script>
+        // var oBtn = document.getElementById('btn');
+
+        var oBtn = document.querySelector('[type=button]');
+        var allDiv = "";
+        //绑定事件
+        oBtn.onclick = function(){
+            for(var i = 0;i < 10; i++){
+                //创建节点
+                var div = document.createElement("div");
+                document.body.appendChild(div)
+            }
+            
+        }
+
+
+    </script>
+</body>
+
+</html>
