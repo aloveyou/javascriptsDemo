@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #button{
+            width: 150px;
+            height: 50px;
+            margin: 50px auto;
+            cursor: pointer;
+            text-align: center;
+            line-height: 50px;
+        }
+        .pink{
+            background-color: pink;
+            color: red;
+        }
+        .green{
+            background-color: green;
+            color: #000;
+        }
+        .blue{
+            background-color: skyblue;
+            color: #eee;
+        }
+        .ivory{
+            background-color: ivory;
+            color: lightsalmon;
+        }
+    </style>
+</head>
+<body>
+    <div id="button" class="pink">按钮</div>
+    <script>
+        
+        var btn = document.getElementById('button');
+        var carr = ["pink","green","blue","ivory"];
+        var i = 0;
+
+        btn.onclick = function(){
+            btn.className = carr[++i % 4];
+        }
+
+
+    </script>
+</body>
+</html>

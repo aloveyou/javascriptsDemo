@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Nic Ray</title>
+    <style>
+            *{
+                margin:0;
+                padding:0;
+            }
+            ul,ol,li{
+                list-style:none;
+            }
+            a{
+                text-decoration:none;
+            }
+            img{
+                border:none;
+            }
+
+            #banner{
+                width: 600px;
+                height: 375px;
+                border: 1px solid #ccc;
+                margin: 50px auto;
+                position: relative;
+            }
+            #banner ul li{
+                position: absolute;
+            }
+            #banner ul li img{
+                /* display: block; */
+                width: 100%;
+                display: none;
+            }
+            #banner p{
+                position: absolute;
+                width: 100%;
+                line-height: 25px;
+                text-align: center;
+                background-color: rgba(0,0,0,0.5);
+                color: #fff;
+            }
+            #banner p.top{
+                top: 0;
+            }
+            #banner p.bottom{
+                bottom: 0;
+            }
+            #banner a{
+                position: absolute;
+                width: 30px;
+                color: #fff;
+                font-size: 25px;
+                top: 50%;
+                margin-top: -15px;
+                line-height: 30px;
+                text-align: center;
+                background-color: rgba(0,0,0,0.5);
+            }
+            #banner a:hover{
+                background-color: rgba(255,255,0,0.5)
+            }
+            #banner a.prev{
+                left: 0;
+            }
+            #banner a.next{
+                right: 0;
+            }
+            .btnBar{
+                width: 600px;
+                margin: 50px auto;
+                position: relative;
+                text-align: center;
+            }
+            .btnBar button{
+                padding: 10px;
+                background-color: #ccc;
+            }
+            .btnBar button.active{
+                background-color: red;
+                color: #fff;
+            }
+
+    </style>
+</head>
+<body>
+    <div id="banner">
+        <ul>
+            <li>
+                <img src="image/1.jpg" alt="">
+            </li>
+            <li>
+                <img src="image/2.jpg" alt="">
+            </li>
+            <li>
+                <img src="image/3.jpg" alt="">
+            </li>
+            <li>
+                <img src="image/4.jpg" alt="">
+            </li>
+            <li>
+                <img src="image/5.jpg" alt="">
+            </li>
+        </ul>
+        <p class="top">1/5</p>
+        <p class="bottom">大战僵尸</p>
+        <!-- &lt;是小于号，&gt;是大于号 -->
+        <a class="prev" href="javascript:void(0);">&lt;</a>
+        <a class="next" href="javascript:void(0);">&gt;</a>
+    </div>
+    <div class="btnBar">
+        <button class="active">正常模式</button>
+        <button>循环模式</button>
+    </div>
+    <script>
+        var aBtn = document.getElementsByTagName('a');
+        var aImg = document.getElementsByTagName('img');
+        var oTop = document.getElementsByClassName('top')[0];
+        var oBot = document.getElementsByClassName('bottom')[0];
+        var num = 0;
+        var onoff = true;
+        var arrText = ["植物","大战","植物大战","植物大战僵尸","植物大战僵尸中文版"];
+        var aBtnMod = document.getElementsByTagName('button')
+
+        aImg[0].style.display = "block"//显示第一个img
+        // 单边模式
+        aBtn[0].onclick = function(){//左按钮
+            aImg[num].style.display = "none"
+            num--;
+            if(num<0){
+                // if(onoff){
+                //     num = 0
+                // }else{
+                //     num = 4
+                // }
+                num = onoff ? 0 : 4;
+            }
+            // aImg[num].style.display = "block";
+            // oTop.innerHTML = num + 1 + "/5";
+            // oBot.innerHTML = arrText[num];
+            changeStat();
+        }
+        aBtn[1].onclick = function(){//右按钮
+            aImg[num].style.display = "none";
+            num++;
+            if(num > 4){
+                // if(onoff){
+                //     num = 4
+                // }else{
+                //     num = 0
+                // }
+                num = onoff ? 4 : 0;
+            }
+            // aImg[num].style.display = "block";
+            // oTop.innerHTML = num + 1 + "/5";
+            // oBot.innerHTML = arrText[num];
+            changeStat();
+        }
+        //切换模式
+        aBtnMod[0].onclick = function(){//单边模式
+            onoff = true;
+            aBtnMod[1].className = "";
+            this.className = "active";
+        }
+
+        aBtnMod[1].onclick = function(){//循环模式
+            onoff = false;
+            aBtnMod[0].className = "";
+            this.className = "active";
+        }
+
+        //优化函数
+        function changeStat(){
+            aImg[num].style.display = "block";
+            oTop.innerHTML = num + 1 + "/5";
+            oBot.innerHTML = arrText[num];
+        }
+
+
+         // 循环模式
+        //  aBtn[0].onclick = function(){//左按钮
+        //     aImg[num].style.display = "none"
+        //     num--;
+        //     if(num < 0){
+        //         num = 4
+        //     }
+        //     aImg[num].style.display = "block";
+        //     oTop.innerHTML = num - 1 + "/5";
+        //     oBot.innerHTML = arrText[num];
+        // }
+        // aBtn[1].onclick = function(){//右按钮
+        //     aImg[num].style.display = "none";
+        //     num++;
+        //     if(num > 4){
+        //         num = 0
+        //     }
+        //     aImg[num].style.display = "block";
+        //     oTop.innerHTML = num + 1 + "/5";
+        //     oBot.innerHTML = arrText[num];
+        // }
+    </script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+			margin:0;
+			padding:0;
+		}
+		ul,ol,li{
+			list-style:none;
+		}
+		a{
+			text-decoration:none;
+		}
+		img{
+			border:none;
+		}
+        #wrap{
+            width: 500px;
+            margin: 50px auto;
+        }
+        #text{
+            width: 494px;
+            height: 100px;
+            border: 1px solid #000;
+            resize: none;
+        }
+        #inp{
+            float: right;
+        }
+        #list{
+            width: 100%;
+            margin-top: 30px;
+        }
+        #list li{
+            width: 100%;
+            line-height: 22px;
+            font-size: 14px;
+            color: #333;
+            text-indent: 2em;
+            padding: 10px 0;
+            border-bottom: 1px dotted #999;
+        }
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <textarea id="text"></textarea>
+        <input id="inp" type="button" value="提交">
+        <ul id="list">
+            <li>111111</li>
+            <li>222222</li>
+        </ul>
+    </div>
+
+    <script>
+        //获取元素
+        var oText = document.getElementById('text'),
+        oBtn = document.getElementById('inp'),
+        oList = document.getElementById('list'),
+        oLi = document.createElement("li");
+        //绑定点击事件
+        oBtn.onclick = function(){
+            if(oText.value){
+                var text = "<li>" + oText.value + "</li>";
+                oList.innerHTML += text;
+                oText.value = ""
+            }
+
+        //     //节点操作
+        //     oLi.innerHTML = oText.value;
+        //     if(oList.children){
+        //         oList.insertBefore(oLi, oList.children[0]);
+        //     }else{
+        //         oList.appendChild(oLi);
+        //     }
+        //     oText.value = "";
+        }
+    </script>
+</body>
+</html>
