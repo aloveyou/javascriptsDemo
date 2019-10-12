@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="Author" content="">
+    <meta name="Keywords" content="关键字">
+    <meta name="Description" content="描述">
+    <title>购物车结算</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul,
+        ol,
+        li {
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        img {
+            border: none;
+        }
+
+        table {
+            width: 1000px;
+            margin: 50px auto 0;
+            user-select: none;
+            border-collapse: collapse;
+            border-color: rgb(230, 10, 47);
+        }
+
+        table tr td {
+            width: 250px;
+            height: 100px;
+            text-align: center;
+        }
+
+        table tr.title td {
+            height: 50px;
+            background-color: #c36;
+            color: #fff;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        table tr td img {
+            width: auto;
+            display: block;
+            height: 70px;
+            margin: 0 auto;
+        }
+
+        table tr td.number span {
+            display: inline-block;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        table tr span.sub,
+        table tr span.add {
+            width: 30px;
+            height: 30px;
+            line-height: 30px;
+            cursor: pointer;
+            background-color: #ddd;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        table td.number span.num {
+            width: 50px;
+            height: 28px;
+            border: 1px solid #ddd;
+            color: #c36;
+            line-height: 28px;
+        }
+
+        .box {
+            width: 1000px;
+            height: 50px;
+            margin: 10px auto;
+            background-color: #c36;
+        }
+
+        .box p {
+            float: right;
+            width: 250px;
+            height: 50px;
+            line-height: 50px;
+            color: #fff;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .box p span {
+            color: yellowgreen;
+            font-weight: bold;
+            font-size: 16px;
+        }
+    </style>
+</head>
+
+<body>
+    <table border="1">
+        <thead></thead>
+        <tbody>
+            <tr class="title">
+                <td>商品</td>
+                <td>单价</td>
+                <td>数量</td>
+                <td>小计</td>
+            </tr>
+            <tr>
+                <td><img src="img/shop1.jpg" alt=""></td>
+                <td class="unit-price">8</td>
+                <td class="number"><span class="sub">-</span> <span class="num">0</span> <span class="add">+</span></td>
+                <td class="price">0</td>
+            </tr>
+            <tr>
+                <td><img src="img/shop2.jpg" alt=""></td>
+                <td class="unit-price">10</td>
+                <td class="number"><span class="sub">-</span> <span class="num">0</span> <span class="add">+</span></td>
+                <td class="price">0</td>
+            </tr>
+            <tr>
+                <td><img src="img/shop3.jpg" alt=""></td>
+                <td class="unit-price">12.5</td>
+                <td class="number"><span class="sub">-</span> <span class="num">0</span> <span class="add">+</span></td>
+                <td class="price">0</td>
+            </tr>
+            <tr>
+                <td><img src="img/shop4.jpg" alt=""></td>
+                <td class="unit-price">23</td>
+                <td class="number"><span class="sub">-</span> <span class="num">0</span> <span class="add">+</span></td>
+                <td class="price">0</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="box">
+        <p class="totalPrice">合计费用：￥<span>0</span></p>
+        <p class="totalNum">已选中商品： <span>0</span> 个</p>
+    </div>
+</body>
+<script>
+    var aSub = document.getElementsByClassName('sub');
+    var aAdd = document.getElementsByClassName('add');
+    var aNum = document.getElementsByClassName('num');
+    var aUnitPrice = document.getElementsByClassName('unit-price');
+    var aPrice = document.getElementsByClassName('price');
+    var oTotalPrice = document.querySelector('.totalPrice span');
+    var oTotalNum = document.querySelector('.totalNum span');
+    var len = aAdd.length;
+    // var all, allPrice = 0;
+    // for (var i = 0; i < len; i++) {
+    //     aSub[i].index = i;
+    //     aAdd[i].index = i;
+
+    //     aSub[i].onclick = function () {
+    //         var num = aNum[this.index].innerHTML - 0;
+    //         num--;
+    //         if (num < 0) num = 0;
+    //         //计算价格
+    //         var price = aUnitPrice[this.index].innerHTML * num;
+    //         aPrice[this.index].innerHTML = price;
+    //         aNum[this.index].innerHTML = num;
+    //         //计算总数量
+    //         all = 0;
+    //         allPrice = 0;
+    //         for (var j = 0; j < len; j++) {
+    //             all += aNum[j].innerHTML - 0;
+    //             allPrice += aPrice[j].innerHTML - 0;
+    //         }
+    //         // console.log(all)
+    //         oTotalNum.innerHTML = all;
+    //         oTotalPrice.innerHTML = allPrice;
+    //     }
+    //     aAdd[i].onclick = function () {
+    //         var num = aNum[this.index].innerHTML - 0;
+    //         num++;
+    //         var price = aUnitPrice[this.index].innerHTML * num;
+    //         aPrice[this.index].innerHTML = price;
+    //         aNum[this.index].innerHTML = num;
+
+    //         all = 0;
+    //         allPrice = 0;
+    //         for (var j = 0; j < len; j++) {
+    //             all += aNum[j].innerHTML - 0;
+    //             allPrice += aPrice[j].innerHTML - 0;
+    //         }
+    //         // console.log(all)
+    //         oTotalNum.innerHTML = all;
+    //         oTotalPrice.innerHTML = allPrice;
+    //     }
+    // }
+    for (var i = 0; i < len; i++) {
+        aSub[i].index = i;
+        aAdd[i].index = i;
+
+        aSub[i].onclick = function () {
+            clickEvent(true, this);
+        }
+        aAdd[i].onclick = function () {
+            clickEvent(false, this);
+        }
+    }
+    //计算总量和总价
+    function count(idx, num) {
+        aPrice[idx].innerHTML = aUnitPrice[idx].innerHTML * num;
+        var allNum = 0;
+        var allPrice = 0;
+        for (var j = 0; j < len; j++) {
+            allNum += aNum[j].innerHTML - 0;
+            allPrice += aPrice[j].innerHTML - 0;
+        }
+        oTotalNum.innerHTML = allNum;
+        oTotalPrice.innerHTML = allPrice;
+    }
+    //点击事件
+    function clickEvent(bol, This) {
+        var index = This.index;
+        num = aNum[index].innerHTML - 0;
+        if (bol) {
+            num--;
+            num = Math.max(num, 0);
+        } else {
+            num++;
+        }
+        aNum[index].innerHTML = num;
+        count(index, num);
+    }
+</script>
+
+</html>
