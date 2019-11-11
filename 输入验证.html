@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: "Microsoft yahei", serif;
+        }
+        ul,
+        ol,
+        li {
+            list-style: none;
+        }
+        a {
+            text-decoration: none;
+        }
+        img {
+            border: none;
+        }
+        body{
+            background-color: #000;
+        }
+        #box{
+            position: relative;
+            width: 500px;
+            margin: 100px auto 0;
+            border: 1px solid rgb(235, 141, 141);
+            background-color: rgb(205, 221, 255);            
+        }
+        #box h2{
+            height: 40px;
+            line-height: 40px;
+            background-color: rgb(178, 135, 235);
+            color: #fff;
+            font-size: 20px;
+            text-align: center;
+        }
+        #box ul li{   
+            position: relative;
+            overflow: hidden;         
+            height: 42px;
+            line-height: 42px;
+            margin: 20px 0;
+            transition: height .4s;;
+        }
+        #box ul li.wrong{
+            height: 62px;
+        }
+        #box ul li.right{
+            height: 42px;
+        }
+        #box ul li input{
+            position: relative;
+            display: block;
+            z-index: 1;
+            width: 270px;
+            height: 40px;
+            text-indent: 15px;
+            margin: 0 auto;
+            border: 1px solid #ccc;
+        }
+        #box ul li input:focus {
+            border: 1px solid pink;
+        }
+        #box ul li.wrong input{
+            border-color: red;
+        }
+        #box ul li.right input{
+            border-color: #00ae00;
+        }
+        #box ul li.right p.pass{
+            display: block;
+        }
+        #box ul li p.tip{
+            overflow: hidden;
+            height: 20px;
+            line-height: 20px;
+            margin-left: 115px;
+            color: #fb0021;
+            font-size: 12px;
+        }
+        #box ul li p.pass{
+            position: absolute;
+            display: none;
+            right: 80px;
+            top: 10px;
+            width: 20px;
+            height: 20px;
+            line-height: 20px;
+            text-align: center;
+            color: green;
+            font-weight: bolder;
+            font-size: 18px;
+            user-select: none;
+            border-radius: 50%;
+            box-shadow: 1px 1px 8px #01E;
+        }
+        #tip{
+            position: absolute;
+            z-index: 0;
+            width: 150px;
+            height: 40px;
+            line-height: 40px;
+            top: 40%;
+            left: 50%;
+            margin-left: -75px;
+            margin-top: -20px;
+            text-align: center;
+            font-size: 12px;
+            font-weight: bolder;
+            color: #fff;
+            background-color: #000;
+            opacity: 0;
+            transition: opacity .3s,top .3s;
+        }
+        #tip.show{
+            z-index: 99;
+            opacity: 1;
+            top: 50%;
+        }
+        #sub{
+            display: block;
+            width: 250px;
+            height: 40px;
+            margin: 0 auto 20px;
+            background-color: #09c;
+            border: 1px solid #ccc;
+            color: #fff;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;            
+        }
+        #sub:hover{
+            background-color: green;
+            color: skyblue;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <h2>注册</h2>
+        <form action="" method="POST" onsubmit="return check(this)">
+            <ul>
+                <li>
+                    <input type="text" name="user" class="first" placeholder="请输入您的用户名">
+                    <p class="tip">错误：用户名格式不正确</p>
+                    <p class="pass">√</p>
+                </li>
+                <li>
+                    <input type="password" name="pwd" class="first" placeholder="请输入您的密码">
+                    <p class="tip">错误：密码格式不正确</p>
+                    <p class="pass">√</p>
+                </li>
+                <li>
+                    <input type="password" class="second" placeholder="请再次输入您的密码">
+                    <p class="tip">错误：两次密码输入不一致</p>
+                    <p class="pass">√</p>
+                </li>
+                <li>
+                    <input type="text" name="tel" class="first" placeholder="请输入您的手机号">
+                    <p class="tip">错误：手机号格式不正确</p>
+                    <p class="pass">√</p>
+                </li>
+                <li>
+                    <input type="text" name="qq" class="first" placeholder="请输入您的QQ号">
+                    <p class="tip">错误：QQ号格式不正确</p>
+                    <p class="pass">√</p>
+                </li>
+                <li>
+                    <input type="text" name="email" class="first" placeholder="请输入您的邮箱">
+                    <p class="tip">错误：邮箱格式不正确</p>
+                    <p class="pass">√</p>
+                </li>
+            </ul>
+            <div id="tip">请先填写密码！</div>
+            <input type="submit" id="sub" value="提交">
+        </form>        
+    </div>
+
+    <script>
+        //获取元素
+        var aInput = document.querySelectorAll("#box li input.first"),
+            oSecondPwd = document.querySelector("#box .second"),
+            aPass = document.querySelectorAll("#box .pass"),
+            oTip = document.getElementById("tip"),
+            aSub = document.getElementById("sub");
+        var len = aInput.length;
+        var reg = {
+            //用户名的正则，6-18位，数字字母_ 且以字母开头
+            user: /^[a-z]\w{5,17}$/i,
+            //密码正则
+            pwd: /^[\w\-\[\]\{\}\\<>,.*/=+)(:;%&^@!~|]{6,15}$/,
+            //手机号
+            tel: /^1[356789]\d{9}$/,
+            //qq
+            qq: /^[1-9]\d{4,9}$/,
+            //邮箱
+            email: /^[a-z1-9_]\w{4,17}@[0-9a-z]{2,}\.[a-z]{2,4}$/i
+        }
+
+        function fn(){
+            //循环绑定事件
+            for(var i = 0;i < len;i++){
+                aInput[i].addEventListener("blur",function(){
+                    var val = this.value;
+                    if(val === ''){
+                        return;
+                    }
+                    if(reg[this.name].test(val)){
+                        right.call(this);
+                    }else{
+                        //正则匹配失败
+                        wrong.call(this);
+                        this.value = '';
+                        this.focus();
+                    }
+                })
+            }
+            //再次输入密码获取焦点事件
+            oSecondPwd.addEventListener("focus",function(){
+                if(!aInput[1].value){
+                    oTip.classList.add('show');
+                    setTimeout(() => {
+                        oTip.classList.remove('show');
+                    }, 2000);
+                    aInput[1].focus();
+                }
+            })
+
+            //再次输入密码失去焦点事件
+            oSecondPwd.addEventListener("blur",function(){
+                val = this.value;
+                if(val ===''){
+                    return;
+                }
+                if(val == aInput[1].value){
+                    //两次密码输入一致
+                    right.call(this);
+                }else{
+                    wrong.call(this);
+                    aInput[1].parentNode.classList.remove("right");
+                    this.value = '';
+                    aInput[1].value = '';
+                    aInput[1].focus();                   
+                }
+            })
+
+            //输入成功函数
+            function right(){
+                var parentLiClassList = this.parentNode.classList;
+                parentLiClassList.add("right");
+                parentLiClassList.remove("wrong");
+            }
+            //输入失败函数
+            function wrong(){
+                var parentLiClassList = this.parentNode.classList;
+                parentLiClassList.add("wrong");
+                parentLiClassList.remove("right");
+            }            
+        }
+        fn()
+        //提交
+        function check(form) {
+                if (aInput[0].value&&aInput[1].value
+                        &&aInput[2].value
+                        &&aInput[3].value
+                        &&aInput[4].value) {
+                    return true;
+                } else {
+                    alert('请输入完整信息！');
+                    return false;
+                }
+            }
+    </script>
+</body>
+
+</html>
