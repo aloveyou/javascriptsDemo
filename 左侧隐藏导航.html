@@ -11,38 +11,45 @@
             margin: 0px;
             padding: 0px;
         }
+
         ul,
         ol,
         li {
             list-style: none;
         }
+
         a {
             text-decoration: none;
         }
+
         img {
             border: none;
         }
-        #Logo{
+
+        #Logo {
             width: 50px;
             height: 100%;
             position: absolute;
             left: 0px;
             top: 0px;
-           
+
         }
-        #Menu{
+
+        #Menu {
             position: absolute;
             height: 100%;
             left: -50px;
             top: 0;
             background-color: #666;
         }
-        #Menu ul{
+
+        #Menu ul {
             width: 50px;
             height: 500px;
             margin-top: 150px;
         }
-        #Menu ul li{
+
+        #Menu ul li {
             height: 36px;
             width: 50px;
             margin: 20px 0;
@@ -50,10 +57,12 @@
             text-align: center;
             position: relative;
         }
-        #Menu ul li.bg{
+
+        #Menu ul li.bg {
             background-color: #ffffcc;
         }
-        #Menu ul li .con{
+
+        #Menu ul li .con {
             width: 200px;
             height: 180px;
             border: 1px solid #666;
@@ -64,14 +73,16 @@
             display: none;
             background-color: #ffffcc;
         }
-        #Logo p.but{
+
+        #Logo p.but {
             background: url("image/icon.png") 0px -60px;
             width: 50px;
             height: 50px;
             bottom: 50px;
             position: absolute;
         }
-        #Logo p.but:hover{
+
+        #Logo p.but:hover {
             cursor: pointer;
         }
     </style>
@@ -95,12 +106,12 @@
                 </li>
                 <li>
                     <a href="#"><img src="image/bq4.png" alt=""></a>
-                    
+
                     <div class="con"></div>
                 </li>
                 <li>
                     <a href="#"><img src="image/bq5.png" alt=""></a>
-                    
+
                     <div class="con"></div>
                 </li>
             </ul>
@@ -113,10 +124,10 @@
         var aLi = document.getElementsByTagName('li');
         var oCon = document.getElementsByClassName('con');
         console.log(oCon);
-        
+
         var len = aLi.length;
         var tag = true;
-        
+
         oBut.onclick = function () {
             if (tag) {
                 // console.log(1);
@@ -130,21 +141,8 @@
                 tag = true;
             }
         }
-        // for(var i = 0; i < len; i++){
-        //     aLi[i].onmouseenter = function(){
-        //         this.className = "bg";
-        //         this.children[1].style.display = "block"; 
-        //     }
-        //     aLi[i].onmouseleave = function(){
-        //         this.className = "";
-        //         this.children[1].style.display = "none"; 
-        //     }
-        // }
-
-        //利用闭包
-        for(var i = 0;i < 5;i++){
-            (function(i){
-                aLi[i].onmouseenter = function(){
+        for(var i = 0; i < len; i++){
+            aLi[i].onmouseenter = function(){
                 this.className = "bg";
                 this.children[1].style.display = "block"; 
             }
@@ -152,7 +150,6 @@
                 this.className = "";
                 this.children[1].style.display = "none"; 
             }
-            })(i)
         }
 
     </script>
