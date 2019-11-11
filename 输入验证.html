@@ -12,28 +12,34 @@
             padding: 0;
             font-family: "Microsoft yahei", serif;
         }
+
         ul,
         ol,
         li {
             list-style: none;
         }
+
         a {
             text-decoration: none;
         }
+
         img {
             border: none;
         }
-        body{
+
+        body {
             background-color: #000;
         }
-        #box{
+
+        #box {
             position: relative;
             width: 500px;
             margin: 100px auto 0;
             border: 1px solid rgb(235, 141, 141);
-            background-color: rgb(205, 221, 255);            
+            background-color: rgb(205, 221, 255);
         }
-        #box h2{
+
+        #box h2 {
             height: 40px;
             line-height: 40px;
             background-color: rgb(178, 135, 235);
@@ -41,21 +47,26 @@
             font-size: 20px;
             text-align: center;
         }
-        #box ul li{   
+
+        #box ul li {
             position: relative;
-            overflow: hidden;         
+            overflow: hidden;
             height: 42px;
             line-height: 42px;
             margin: 20px 0;
-            transition: height .4s;;
+            transition: height .4s;
+            ;
         }
-        #box ul li.wrong{
+
+        #box ul li.wrong {
             height: 62px;
         }
-        #box ul li.right{
+
+        #box ul li.right {
             height: 42px;
         }
-        #box ul li input{
+
+        #box ul li input {
             position: relative;
             display: block;
             z-index: 1;
@@ -65,19 +76,24 @@
             margin: 0 auto;
             border: 1px solid #ccc;
         }
+
         #box ul li input:focus {
             border: 1px solid pink;
         }
-        #box ul li.wrong input{
+
+        #box ul li.wrong input {
             border-color: red;
         }
-        #box ul li.right input{
+
+        #box ul li.right input {
             border-color: #00ae00;
         }
-        #box ul li.right p.pass{
+
+        #box ul li.right p.pass {
             display: block;
         }
-        #box ul li p.tip{
+
+        #box ul li p.tip {
             overflow: hidden;
             height: 20px;
             line-height: 20px;
@@ -85,7 +101,8 @@
             color: #fb0021;
             font-size: 12px;
         }
-        #box ul li p.pass{
+
+        #box ul li p.pass {
             position: absolute;
             display: none;
             right: 80px;
@@ -101,7 +118,8 @@
             border-radius: 50%;
             box-shadow: 1px 1px 8px #01E;
         }
-        #tip{
+
+        #tip {
             position: absolute;
             z-index: 0;
             width: 150px;
@@ -117,14 +135,16 @@
             color: #fff;
             background-color: #000;
             opacity: 0;
-            transition: opacity .3s,top .3s;
+            transition: opacity .3s, top .3s;
         }
-        #tip.show{
+
+        #tip.show {
             z-index: 99;
             opacity: 1;
             top: 50%;
         }
-        #sub{
+
+        #sub {
             display: block;
             width: 250px;
             height: 40px;
@@ -134,9 +154,10 @@
             color: #fff;
             font-size: 18px;
             font-weight: bold;
-            cursor: pointer;            
+            cursor: pointer;
         }
-        #sub:hover{
+
+        #sub:hover {
             background-color: green;
             color: skyblue;
         }
@@ -181,7 +202,7 @@
             </ul>
             <div id="tip">请先填写密码！</div>
             <input type="submit" id="sub" value="提交">
-        </form>        
+        </form>
     </div>
 
     <script>
@@ -205,17 +226,17 @@
             email: /^[a-z1-9_]\w{4,17}@[0-9a-z]{2,}\.[a-z]{2,4}$/i
         }
 
-        function fn(){
+        function fn() {
             //循环绑定事件
-            for(var i = 0;i < len;i++){
-                aInput[i].addEventListener("blur",function(){
+            for (var i = 0; i < len; i++) {
+                aInput[i].addEventListener("blur", function () {
                     var val = this.value;
-                    if(val === ''){
+                    if (val === '') {
                         return;
                     }
-                    if(reg[this.name].test(val)){
+                    if (reg[this.name].test(val)) {
                         right.call(this);
-                    }else{
+                    } else {
                         //正则匹配失败
                         wrong.call(this);
                         this.value = '';
@@ -224,8 +245,8 @@
                 })
             }
             //再次输入密码获取焦点事件
-            oSecondPwd.addEventListener("focus",function(){
-                if(!aInput[1].value){
+            oSecondPwd.addEventListener("focus", function () {
+                if (!aInput[1].value) {
                     oTip.classList.add('show');
                     setTimeout(() => {
                         oTip.classList.remove('show');
@@ -235,49 +256,49 @@
             })
 
             //再次输入密码失去焦点事件
-            oSecondPwd.addEventListener("blur",function(){
+            oSecondPwd.addEventListener("blur", function () {
                 val = this.value;
-                if(val ===''){
+                if (val === '') {
                     return;
                 }
-                if(val == aInput[1].value){
+                if (val == aInput[1].value) {
                     //两次密码输入一致
                     right.call(this);
-                }else{
+                } else {
                     wrong.call(this);
                     aInput[1].parentNode.classList.remove("right");
                     this.value = '';
                     aInput[1].value = '';
-                    aInput[1].focus();                   
+                    aInput[1].focus();
                 }
             })
 
             //输入成功函数
-            function right(){
+            function right() {
                 var parentLiClassList = this.parentNode.classList;
                 parentLiClassList.add("right");
                 parentLiClassList.remove("wrong");
             }
             //输入失败函数
-            function wrong(){
+            function wrong() {
                 var parentLiClassList = this.parentNode.classList;
                 parentLiClassList.add("wrong");
                 parentLiClassList.remove("right");
-            }            
+            }
         }
         fn()
         //提交
         function check(form) {
-                if (aInput[0].value&&aInput[1].value
-                        &&aInput[2].value
-                        &&aInput[3].value
-                        &&aInput[4].value) {
-                    return true;
-                } else {
-                    alert('请输入完整信息！');
-                    return false;
-                }
+            if (aInput[0].value && aInput[1].value
+                && aInput[2].value
+                && aInput[3].value
+                && aInput[4].value) {
+                return true;
+            } else {
+                alert('请输入完整信息！');
+                return false;
             }
+        }
     </script>
 </body>
 
