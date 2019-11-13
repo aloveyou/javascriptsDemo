@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box{
+            width: 100px;
+            height: 100px;
+            background-color: skyblue;
+        }
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+
+    <script src="./js/jquery.js"></script>
+
+    <script>
+        /**
+         * animate方法(自定义)
+         *      animate({},time[,callback])
+         *      jQuery动画不是匀速度，easeInOut
+         * 动画相关方法：
+         *      1、show()  hide() toggle()
+         *          显示     隐藏     切换
+         *      2、slideDown()  slideUp()  slideToggle()
+         *      3、fadeIn()  fadeOut()  fadeTo(2000,0.5) fadeToggle()
+         *          改变透明度-淡入淡出-opacity
+         * 
+        */
+        $('.box').animate({
+            "width":500,
+            "height":500
+        },2000,function(){
+            $(this).animate({
+                "width":100
+            },3000,function(){
+                $(this).animate({
+                    "height":100,
+                    "width":300
+                },1000,function(){
+                    $(this).css("background-color","red")
+                })
+            })
+        })
+        
+
+    </script>
+</body>
+</html>
